@@ -16,7 +16,7 @@ spec:
       containers:
       - name: {model_name}-container
         #image: gcr.io/tensorflow-serving/resnet 
-        image: docker.io/{docker_user}/{model_name}:{github.event.client_payload.sha}
+        image: docker.io/{docker_user}/{model_name}:{github.sha}
         ports:
         - containerPort: 80
 ---
