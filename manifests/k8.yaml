@@ -1,0 +1,35 @@
+#manifest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-diamond-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ml-diamond-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ml-diamond-server
+    spec:
+      containers:
+      - name: ml-diamond-container
+        #image: gcr.io/tensorflow-serving/resnet 
+        image: docker.io/n4ndomx/fastapi-ml-diamond:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: ml-diamond-service
+  name: ml-diamond-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: ml-diamond-server
+  type: LoadBalancer
