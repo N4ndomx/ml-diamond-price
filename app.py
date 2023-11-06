@@ -10,7 +10,7 @@ app = FastAPI(title = 'Diamond Prediction')
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:52474"],  # Reemplaza con el origen de tu aplicación Flutter
+    allow_origins=["*"],  # Reemplaza con el origen de tu aplicación Flutter
     allow_methods=["*"],
     allow_headers=["*"],
 )
