@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import numpy as np
 from joblib import load
 import pathlib
 
+
 app = FastAPI(title = 'Diamond Prediction')
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:52474"],  # Reemplaza con el origen de tu aplicación Flutter
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 model = load(pathlib.Path('model/model_ps.joblib'))
 
